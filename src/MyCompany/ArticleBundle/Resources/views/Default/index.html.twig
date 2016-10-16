@@ -1,0 +1,8 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}ArticleBundle/Default/index{% endblock %}
+
+{% block body %}
+    {{ dump(article) }}
+    {{ article.location }}
+{% endblock %}

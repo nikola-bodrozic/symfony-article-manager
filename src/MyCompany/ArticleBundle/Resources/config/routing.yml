@@ -1,0 +1,3 @@
+my_company_article_homepage:
+    path:     /article
+    defaults: { _controller: MyCompanyArticleBundle:Default:index }

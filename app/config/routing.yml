@@ -1,3 +1,7 @@
+my_company_article:
+    resource: "@MyCompanyArticleBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
