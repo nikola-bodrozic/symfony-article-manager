@@ -4,6 +4,7 @@ namespace MyCompany\ArticleBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use MyCompany\ArticleBundle\Entity\Article;
 use MyCompany\ArticleBundle\Form\ArticleType;
@@ -15,6 +16,7 @@ use MyCompany\ArticleBundle\Form\ArticleType;
 class ArticleController extends Controller
 {
     /**
+     * @Template()
      * Lists all Article entities.
      *
      */
@@ -24,9 +26,9 @@ class ArticleController extends Controller
 
         $articles = $em->getRepository('MyCompanyArticleBundle:Article')->findAll();
 
-        return $this->render('MyCompanyArticleBundle:article:index.html.twig', array(
+        return array(
             'articles' => $articles,
-        ));
+        );
     }
 
     /**
@@ -47,7 +49,7 @@ class ArticleController extends Controller
             return $this->redirectToRoute('news_show', array('id' => $article->getId()));
         }
 
-        return $this->render('MyCompanyArticleBundle:article:new.html.twig', array(
+        return $this->render('MyCompanyArticleBundle:Article:new.html.twig', array(
             'article' => $article,
             'form' => $form->createView(),
         ));
@@ -61,7 +63,7 @@ class ArticleController extends Controller
     {
         $deleteForm = $this->createDeleteForm($article);
 
-        return $this->render('MyCompanyArticleBundle:article:show.html.twig', array(
+        return $this->render('MyCompanyArticleBundle:Article:show.html.twig', array(
             'article' => $article,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -85,7 +87,7 @@ class ArticleController extends Controller
             return $this->redirectToRoute('news_edit', array('id' => $article->getId()));
         }
 
-        return $this->render('MyCompanyArticleBundle:article:edit.html.twig', array(
+        return $this->render('MyCompanyArticleBundle:Article:edit.html.twig', array(
             'article' => $article,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
