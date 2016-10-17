@@ -5,6 +5,7 @@ namespace MyCompany\ArticleBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use MyCompany\ArticleBundle\Entity\Article;
 use MyCompany\ArticleBundle\Form\ArticleType;
@@ -16,6 +17,7 @@ use MyCompany\ArticleBundle\Form\ArticleType;
 class ArticleController extends Controller
 {
     /**
+     * @Route("/", name="news_index")
      * @Template()
      * Lists all Article entities.
      *

@@ -1,3 +1,6 @@
 my_company_article_news:
     resource: "@MyCompanyArticleBundle/Resources/config/routing/article.yml"
-    prefix:   /news
+    prefix:   /
+my_company_article_e4a2:
+    resource: "@MyCompanyArticleBundle/Controller"
+    type:   annotation

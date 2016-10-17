@@ -16,7 +16,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('time', 'datetime')
+            ->add('time', 'Symfony\Component\Form\Extension\Core\Type\DateTimeType')
             ->add('location')
             ->add('details')
         ;
