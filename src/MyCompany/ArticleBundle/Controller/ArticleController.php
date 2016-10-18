@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use MyCompany\ArticleBundle\Entity\Article;
 use MyCompany\ArticleBundle\Form\ArticleType;
@@ -24,6 +25,8 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
+        throw $this->createAccessDeniedException('message!');
+
         $em = $this->getDoctrine()->getManager();
 
         $articles = $em->getRepository('MyCompanyArticleBundle:Article')->findAll();
@@ -39,6 +42,11 @@ class ArticleController extends Controller
      */
     public function newAction(Request $request)
     {
+        $securityContext = $this->get('security.context');
+        if (!$securityContext->isGranted("ROLE_ADMIN")) {
+            throw $this->createAccessDeniedException('nemate privilegije');
+        }
+
         $article = new Article();
         $form = $this->createForm('MyCompany\ArticleBundle\Form\ArticleType', $article);
         $form->handleRequest($request);
