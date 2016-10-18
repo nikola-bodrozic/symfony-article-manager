@@ -41,10 +41,7 @@ class ArticleController extends Controller
      */
     public function newAction(Request $request)
     {
-        $securityContext = $this->get('security.context');
-        if (!$securityContext->isGranted("ROLE_ADMIN")) {
-            throw $this->createAccessDeniedException('nemate privilegije');
-        }
+        $this->enforceUserSecurity();
 
         $article = new Article();
         $form = $this->createForm('MyCompany\ArticleBundle\Form\ArticleType', $article);
@@ -84,6 +81,8 @@ class ArticleController extends Controller
      */
     public function editAction(Request $request, Article $article)
     {
+        $this->enforceUserSecurity();
+
         $deleteForm = $this->createDeleteForm($article);
         $editForm = $this->createForm('MyCompany\ArticleBundle\Form\ArticleType', $article);
         $editForm->handleRequest($request);
@@ -109,6 +108,8 @@ class ArticleController extends Controller
      */
     public function deleteAction(Request $request, Article $article)
     {
+        $this->enforceUserSecurity();
+
         $form = $this->createDeleteForm($article);
         $form->handleRequest($request);
 
@@ -130,10 +131,19 @@ class ArticleController extends Controller
      */
     private function createDeleteForm(Article $article)
     {
+
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('news_delete', array('id' => $article->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    private function enforceUserSecurity()
+    {
+        $securityContext = $this->container->get('security.context');
+        if (!$securityContext->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException('Need ROLE_USER!');
+        }
     }
 }
