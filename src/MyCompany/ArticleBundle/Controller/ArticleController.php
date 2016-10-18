@@ -139,8 +139,7 @@ class ArticleController extends Controller
         ;
     }
 
-    private function enforceUserSecurity()
-    {
+    private function enforceUserSecurity(){
         $securityContext = $this->container->get('security.context');
         if (!$securityContext->isGranted('ROLE_USER')) {
             throw new AccessDeniedException('Need ROLE_USER!');
