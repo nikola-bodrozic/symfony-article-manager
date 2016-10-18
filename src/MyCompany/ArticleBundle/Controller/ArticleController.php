@@ -25,7 +25,6 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
-        throw $this->createAccessDeniedException('message!');
 
         $em = $this->getDoctrine()->getManager();
 
