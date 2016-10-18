@@ -2,6 +2,10 @@ my_company_article:
     resource: "@MyCompanyArticleBundle/Resources/config/routing.yml"
     prefix:   /
 
+user_controller:
+    resource: "@UserBundle/Controller"
+    type: annotation
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
