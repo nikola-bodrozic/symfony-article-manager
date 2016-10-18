@@ -35,6 +35,11 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * var array
+     * @ORM\Column(name="roles", type="json_array")
+     */
+    private $roles = array();
 
     /**
      * Get id
@@ -110,7 +115,9 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-       return array("ROLE_USER");
+       $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
     }
 
     /**
@@ -134,5 +141,14 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    ////////////////////////////////
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+
+        // allows for chaining
+        return $this;
     }
 }
