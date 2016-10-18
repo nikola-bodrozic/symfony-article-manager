@@ -25,6 +25,11 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
+        /*
+        $em = $this->getDoctrine()->getManager();
+        $userRepo = $em->getRepository('UserBundle:User');
+        var_dump($userRepo->findOneByUsernameOrEmail('ron@example.com'));die;
+        */
 
         $em = $this->getDoctrine()->getManager();
 
