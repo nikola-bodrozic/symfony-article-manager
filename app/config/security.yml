@@ -17,11 +17,11 @@ security:
         secured_area:
             pattern:    ^/
             form_login:
-                check_path: login_checkt
-                login_path: login_formt
+                check_path: login_check
+                login_path: login_form
             logout:
-                path:   _demo_logout
-                target: _demo
+                path:   logout
+                target: homepage
             anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
