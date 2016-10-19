@@ -2,6 +2,7 @@
 
 namespace MyCompany\UserBundle\Repository;
 
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -17,9 +18,9 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
      * @param $username
      * @return User|null
      */
-    public function loadUserByUsername($username)
+    public function findOneByUsernameOrEmail($username)
     {
-        // die(__METHOD__);
+        //die(__METHOD__);
         return $this->createQueryBuilder('u')
             ->andWhere('u.username = :username OR u.email = :email')
             ->setParameter('username', $username)
@@ -27,5 +28,17 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getQuery()
             ->getOneOrNullResult()
             ;
+    }
+
+    public function loadUserByUsername($username)
+    {
+
+        $user = $this->findOneByUsernameOrEmail($username);
+
+        if (!$user) {
+            throw new UsernameNotFoundException( sprintf('Username "%s" does not exist.', $username) );
+        }
+
+        return $user;
     }
 }
