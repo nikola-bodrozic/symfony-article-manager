@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+    {% block body %}
+        <section class="login">
+            <article>
+                <h1>Register</h1>
+                <form action="{{ path('user_register') }}" method="POST">
+                    {{ form_widget(form) }}
+
+                    <input type="submit" class="btn btn-primary pull-left" value="Register!" />
+                </form>
+            </article>
+        </section>
+    {% endblock %}
