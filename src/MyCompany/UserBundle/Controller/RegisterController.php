@@ -19,6 +19,11 @@ class RegisterController extends Controller
         $form = $this->createForm('MyCompany\UserBundle\Form\RegisterFormType', $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Welcome to the Death Star, have a magical day!')
+            ;
+
             $data = $form->getData();
 
             //$user->setUsername($data['username']);

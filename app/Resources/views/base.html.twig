@@ -9,9 +9,18 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+
         <div class="container">
             <div class="row">
-
+<div>
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
                 <div>
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <a class="link" href="{{ path('logout') }}">
