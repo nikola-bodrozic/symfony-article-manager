@@ -7,7 +7,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class RegisterFormType extends AbstractType
 {
-
+/*
+ * MyCompany\UserBundle\Form\RegisterFormType: The FormTypeInterface::setDefaultOptions()
+ * method is deprecated since version 2.7 and will be removed in 3.0.
+ * Use configureOptions() instead. This method will be added to the
+ * FormTypeInterface with Symfony 3.0.
+ */
 	public function getBlockPrefix()
     {
         return 'user_register';
@@ -22,7 +27,7 @@ class RegisterFormType extends AbstractType
     	;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'MyCompany\UserBundle\Entity\User',

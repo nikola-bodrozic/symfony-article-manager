@@ -15,8 +15,8 @@ class RegisterController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $defaultUser = new User();
-        $form = $this->createForm('MyCompany\UserBundle\Form\RegisterFormType', $defaultUser);
+        $user = new User();
+        $form = $this->createForm('MyCompany\UserBundle\Form\RegisterFormType', $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
