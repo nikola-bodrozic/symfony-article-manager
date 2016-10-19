@@ -11,6 +11,7 @@
     <body>
         <div class="container">
             <div class="row">
+
                 <div>
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <a class="link" href="{{ path('logout') }}">
@@ -19,6 +20,7 @@
 {% else %}
     <a class="link" href="{{ path('login_form') }}">Login</a>
 {% endif %}
+    <a class="link" href="{{ path('user_register') }}">Register</a>
                 </div>
                 {% block body %}{% endblock %}
                 {% block javascripts %}{% endblock %}
