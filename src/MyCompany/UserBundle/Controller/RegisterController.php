@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;  
 use MyCompany\UserBundle\Entity\User;
-
+use MyCompany\UserBundle\Form\RegisterFormType;
 class RegisterController extends Controller
 {
     /**
@@ -15,23 +15,17 @@ class RegisterController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $user = new User();
-        $user->setUsername('pera');
-        $form = $this->createFormBuilder($user, ['data_class'=>'MyCompany\UserBundle\Entity\User'])
-            ->add('username', 'Symfony\Component\Form\Extension\Core\Type\TextType')
-            ->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType')
-            ->add('password', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', ["type"=>"Symfony\Component\Form\Extension\Core\Type\PasswordType"])
-            ->getForm()
-        ;
+        $defaultUser = new User();
+        $form = $this->createForm('MyCompany\UserBundle\Form\RegisterFormType', $defaultUser);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $user = new User();
-            $user->setUsername($data['username']);
-            $user->setEmail($data['email']);
-            $user->setPassword($this->encodePassword($user, $data['password']));
+
+            //$user->setUsername($data['username']);
+            //$user->setEmail($data['email']);
+            $user->setPassword($this->encodePassword($user, $user->getPlainPassword() ));
             $user->setRoles(['ROLE_USER']);
-            $user->setIsActive(true);
+            //$user->setIsActive(true);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

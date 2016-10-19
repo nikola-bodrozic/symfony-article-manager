@@ -53,6 +53,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $email;
 
 
+   /**
+    * @var string
+    */
+    private $plainPassword;
+
     /**
      * Get id
      *
@@ -152,7 +157,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+         $this->setPlainPassword(null);
     }
 
     ////////////////////////////////
@@ -284,4 +289,15 @@ class User implements AdvancedUserInterface, \Serializable
             $this->isActive
             ) = unserialize($serialized);
     }
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }    
 }
