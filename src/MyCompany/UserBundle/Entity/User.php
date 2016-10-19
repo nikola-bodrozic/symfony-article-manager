@@ -1,14 +1,17 @@
 <?php
 
 namespace MyCompany\UserBundle\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="MyCompany\UserBundle\Repository\UserRepository")
+ * @UniqueEntity(fields="username", message="That username is taken!")
+ * @UniqueEntity(fields="email", message="That email is taken!")
  */
 class User implements AdvancedUserInterface, \Serializable
 {
@@ -23,14 +26,13 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Put in a username you rebel scum :P")
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="password", type="string", length=255, unique=true)
      */
     private $password;
