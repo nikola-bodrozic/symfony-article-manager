@@ -15,7 +15,9 @@ class RegisterController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $form = $this->createFormBuilder()
+        $user = new User();
+        $user->setUsername('pera');
+        $form = $this->createFormBuilder($user, ['data_class'=>'MyCompany\UserBundle\Entity\User'])
             ->add('username', 'Symfony\Component\Form\Extension\Core\Type\TextType')
             ->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType')
             ->add('password', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', ["type"=>"Symfony\Component\Form\Extension\Core\Type\PasswordType"])
