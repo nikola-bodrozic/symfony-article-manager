@@ -49,6 +49,8 @@ class ArticleController extends Controller
         $this->enforceUserSecurity();
 
         $article = new Article();
+        $this->enforceOwnerSecurity($article);
+
         $form = $this->createForm('MyCompany\ArticleBundle\Form\ArticleType', $article);
         $form->handleRequest($request);
 
@@ -90,6 +92,7 @@ class ArticleController extends Controller
     public function editAction(Request $request, Article $article)
     {
         $this->enforceUserSecurity();
+        $this->enforceOwnerSecurity($article);
 
         $deleteForm = $this->createDeleteForm($article);
         $editForm = $this->createForm('MyCompany\ArticleBundle\Form\ArticleType', $article);
@@ -119,6 +122,9 @@ class ArticleController extends Controller
         $this->enforceUserSecurity();
 
         $form = $this->createDeleteForm($article);
+
+        $this->enforceOwnerSecurity($article);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -151,6 +157,13 @@ class ArticleController extends Controller
         $securityContext = $this->container->get('security.context');
         if (!$securityContext->isGranted('ROLE_USER')) {
             throw new AccessDeniedException('Need ROLE_USER!');
+        }
+    }
+    private function enforceOwnerSecurity(Article $article){
+        $user = $this->getUser();
+
+        if ($user != $article->getOwner()) {
+            throw new AccessDeniedException('denied');
         }
     }
 }
