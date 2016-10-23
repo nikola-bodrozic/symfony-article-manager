@@ -27,6 +27,9 @@
                 <td>{{ article.owner.username }}</td>
                 <td>
                     article has {{ article.writers|length }} writers.
+                    {% for w in article.writers %}
+                        <br>{{ w.username }}
+                    {% endfor %}
                 </td>
                 <td>
 
