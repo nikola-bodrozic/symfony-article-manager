@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use MyCompany\ArticleBundle\Entity\Article;
 use MyCompany\ArticleBundle\Form\ArticleType;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Article controller.
@@ -33,7 +34,14 @@ class ArticleController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $articles = $em->getRepository('MyCompanyArticleBundle:Article')->findAll();
+        $articles = $em->getRepository('MyCompanyArticleBundle:Article')
+        ->createQueryBuilder('a')
+            ->addOrderBy('a.time','DESC')
+            ->andWhere('a.time > :now')
+            ->setParameter('now', new \DateTime())
+            ->getQuery()
+            ->execute()
+        ;
 
         return array(
             'articles' => $articles,
