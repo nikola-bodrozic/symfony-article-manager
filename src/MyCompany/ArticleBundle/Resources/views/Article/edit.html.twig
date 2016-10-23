@@ -18,5 +18,9 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
-    <a href="{{ path('news_attend', { 'id': article.id }) }}">I want to write</a>
+    {% if article.hasWriters(app.user) %}
+        <p>You are writer for this article</p>
+    {% else %}
+        <a href="{{ path('news_attend', { 'id': article.id }) }}">I want to write</a>
+     {% endif %}   
 {% endblock %}

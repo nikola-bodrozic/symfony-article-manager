@@ -193,6 +193,6 @@ class ArticleController extends Controller
 
     public function unattendAction($id)
     {
-
+        // TODO
     }
 }
