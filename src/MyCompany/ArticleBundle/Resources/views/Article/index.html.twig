@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Article list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -11,8 +11,9 @@
                 <th>Time</th>
                 <th>Location</th>
                 <th>Details</th>
-                <th>Actions</th>
                 <th>Owner</th>
+                <th>Writers</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,9 @@
                 <td>{{ article.location }}</td>
                 <td>{{ article.details }}</td>
                 <td>{{ article.owner.username }}</td>
+                <td>
+                    article has {{ article.writers|length }} writers.
+                </td>
                 <td>
 
                     <ul>
@@ -37,6 +41,7 @@
                         {% endif %}
                     </ul>
                 </td>
+
             </tr>
         {% endfor %}
         </tbody>

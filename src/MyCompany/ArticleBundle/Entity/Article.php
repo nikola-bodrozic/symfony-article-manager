@@ -75,7 +75,7 @@ class Article
     /**
      *
      */
-    public function getAttendees()
+    public function getWriters()
     {
         return $this->writers;
     }

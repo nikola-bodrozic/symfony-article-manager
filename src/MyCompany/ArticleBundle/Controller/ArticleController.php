@@ -166,4 +166,33 @@ class ArticleController extends Controller
             throw new AccessDeniedException('you are not owner of this article and you cann`t change it');
         }
     }
+
+    /**
+     * @param $id
+     */
+    public function attendAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var $article \MyCompany\ArticleBundle\Entity\Article
+         */
+        $article = $em->getRepository('MyCompanyArticleBundle:Event')->find($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException('No article found for id '.$id);
+        }
+        $article->getWriters()->add($this->getUser());
+
+        $em->persist($article);
+        $em->flush();
+        // array('slug' => 'my-blog-post')
+        $url = $this->generateUrl('news_show', ["attend" => $article->getId()] );
+
+        return $this->redirect($url);
+    }
+
+    public function unattendAction($id)
+    {
+
+    }
 }

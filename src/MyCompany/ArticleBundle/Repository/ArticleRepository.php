@@ -16,8 +16,8 @@ class ArticleRepository extends EntityRepository
 
         return $this->createQueryBuilder('a')
             ->addOrderBy('a.time','DESC')
-            ->andWhere('a.time > :now')
-            ->setParameter('now', new \DateTime())
+            //->andWhere('a.time > :now')
+            //->setParameter('now', new \DateTime())
             ->getQuery()
             ->execute()
         ;
