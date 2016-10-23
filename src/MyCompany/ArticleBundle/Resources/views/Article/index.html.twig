@@ -12,6 +12,7 @@
                 <th>Location</th>
                 <th>Details</th>
                 <th>Actions</th>
+                <th>Owner</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@
                 <td>{% if article.time %}{{ article.time|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ article.location }}</td>
                 <td>{{ article.details }}</td>
+                <td>{{ article.owner.username }}</td>
                 <td>
 
                     <ul>
