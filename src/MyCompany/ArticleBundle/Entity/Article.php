@@ -4,6 +4,8 @@ namespace MyCompany\ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use MyCompany\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Article
  *
@@ -55,7 +57,28 @@ class Article
      */
     protected $owner;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="MyCompany\UserBundle\Entity\User")
+     * @ORM\JoinTable(
+     *     joinColumns={@ORM\JoinColumn(onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE")}
+     * )
+     */
+    protected $writers;
 //////////////////////////////////////////////
+
+    public function __construct()
+    {
+        $this->writers = new ArrayCollection();
+    }
+
+    /**
+     *
+     */
+    public function getAttendees()
+    {
+        return $this->writers;
+    }
     /**
      * @return User
      */
