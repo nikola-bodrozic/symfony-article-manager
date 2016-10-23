@@ -26,26 +26,10 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
-        /*
         $em = $this->getDoctrine()->getManager();
-        $userRepo = $em->getRepository('UserBundle:User');
-        var_dump($userRepo->findOneByUsernameOrEmail('ron@example.com'));die;
-        */
+        $articles = $em->getRepository('MyCompanyArticleBundle:Article')->getUpcomingArticles();
 
-        $em = $this->getDoctrine()->getManager();
-
-        $articles = $em->getRepository('MyCompanyArticleBundle:Article')
-        ->createQueryBuilder('a')
-            ->addOrderBy('a.time','DESC')
-            ->andWhere('a.time > :now')
-            ->setParameter('now', new \DateTime())
-            ->getQuery()
-            ->execute()
-        ;
-
-        return array(
-            'articles' => $articles,
-        );
+        return array('articles' => $articles,);
     }
 
     /**

@@ -12,5 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
+    public function getUpcomingArticles(){
 
+        return $this->createQueryBuilder('a')
+            ->addOrderBy('a.time','DESC')
+            ->andWhere('a.time > :now')
+            ->setParameter('now', new \DateTime())
+            ->getQuery()
+            ->execute()
+        ;
+    }
 }
