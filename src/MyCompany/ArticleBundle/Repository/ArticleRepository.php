@@ -22,4 +22,17 @@ class ArticleRepository extends EntityRepository
             ->execute()
         ;
     }
+
+	/**
+	* @return Article[]
+	*/
+    public function getRecentlyUpdatedArticles()
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.time > :since')
+            ->setParameter('since', new \DateTime('1 year ago'))
+            ->getQuery()
+            ->execute()
+        ;
+    }    
 }
