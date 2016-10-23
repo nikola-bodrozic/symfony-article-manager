@@ -193,6 +193,24 @@ class ArticleController extends Controller
 
     public function unattendAction($id)
     {
-        // TODO
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var $article \MyCompany\ArticleBundle\Entity\Article
+         */
+        $article = $em->getRepository('MyCompanyArticleBundle:Article')->find($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException('No article found for id '.$id);
+        }
+
+        if ($article->hasWriters($this->getUser())) {
+            $article->getWriters()->removeElement($this->getUser());
+        }
+
+        $em->persist($article);
+        $em->flush();
+        $url = $this->generateUrl('news_show', array('id' => $article->getId()) );
+
+        return $this->redirect($url);
     }
 }

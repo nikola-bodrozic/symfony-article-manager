@@ -19,7 +19,7 @@
         </li>
     </ul>
     {% if article.hasWriters(app.user) %}
-        <p>You are writer for this article</p>
+        <p>You are writer for this article. <a href="{{ path('news_unattend', { 'id': article.id }) }}">Remove me from writers</a></p>
     {% else %}
         <a href="{{ path('news_attend', { 'id': article.id }) }}">I want to write</a>
      {% endif %}   
