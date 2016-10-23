@@ -163,7 +163,7 @@ class ArticleController extends Controller
         $user = $this->getUser();
 
         if ($user != $article->getOwner()) {
-            throw new AccessDeniedException('denied');
+            throw new AccessDeniedException('you are not owner of this article and you cann`t change it');
         }
     }
 }

@@ -23,13 +23,16 @@
                 <td>{{ article.location }}</td>
                 <td>{{ article.details }}</td>
                 <td>
+
                     <ul>
                         <li>
                             <a href="{{ path('news_show', { 'id': article.id }) }}">show</a>
                         </li>
+                        {% if app.user == article.owner %}
                         <li>
                             <a href="{{ path('news_edit', { 'id': article.id }) }}">edit</a>
                         </li>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>
