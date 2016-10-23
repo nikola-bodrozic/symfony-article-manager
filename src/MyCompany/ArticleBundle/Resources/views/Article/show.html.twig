@@ -27,6 +27,11 @@
             </tr>
         </tbody>
     </table>
+<hr>
+
+{% for w in article.writers %}
+<p><strong>{{ w }}</strong> has mail <strong>{{ w.email | truncate(5)}}</strong></p>
+{% endfor %}
 
     <ul>
         <li>

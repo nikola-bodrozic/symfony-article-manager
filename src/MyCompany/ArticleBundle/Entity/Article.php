@@ -79,6 +79,12 @@ class Article
     {
         return $this->writers;
     }
+
+    public function hasWriters(User $user)
+    {
+        return $this->getWriters()->contains($user);
+    }
+
     /**
      * @return User
      */

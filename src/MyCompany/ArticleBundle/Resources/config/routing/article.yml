@@ -19,7 +19,7 @@ news_delete:
     methods:  DELETE
 news_attend:
     path:  /{id}/attend
-    defaults: { _controller: "MyCompanyArticleBundle:Event:attend" }
+    defaults: { _controller: "MyCompanyArticleBundle:Article:attend" }
 news_unattend:
     path:  /{id}/unattend
-    defaults: { _controller: "MyCompanyArticleBundle:Event:unattend" }
+    defaults: { _controller: "MyCompanyArticleBundle:Article:unattend" }

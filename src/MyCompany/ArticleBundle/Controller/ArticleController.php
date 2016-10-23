@@ -41,7 +41,6 @@ class ArticleController extends Controller
         $this->enforceUserSecurity();
 
         $article = new Article();
-        $this->enforceOwnerSecurity($article);
 
         $form = $this->createForm('MyCompany\ArticleBundle\Form\ArticleType', $article);
         $form->handleRequest($request);
@@ -84,7 +83,6 @@ class ArticleController extends Controller
     public function editAction(Request $request, Article $article)
     {
         $this->enforceUserSecurity();
-        $this->enforceOwnerSecurity($article);
 
         $deleteForm = $this->createDeleteForm($article);
         $editForm = $this->createForm('MyCompany\ArticleBundle\Form\ArticleType', $article);
@@ -176,17 +174,19 @@ class ArticleController extends Controller
         /**
          * @var $article \MyCompany\ArticleBundle\Entity\Article
          */
-        $article = $em->getRepository('MyCompanyArticleBundle:Event')->find($id);
+        $article = $em->getRepository('MyCompanyArticleBundle:Article')->find($id);
 
         if (!$article) {
             throw $this->createNotFoundException('No article found for id '.$id);
         }
-        $article->getWriters()->add($this->getUser());
+
+        if (!$article->hasWriters($this->getUser())) {
+            $article->getWriters()->add($this->getUser());
+        }
 
         $em->persist($article);
         $em->flush();
-        // array('slug' => 'my-blog-post')
-        $url = $this->generateUrl('news_show', ["attend" => $article->getId()] );
+        $url = $this->generateUrl('news_show', array('id' => $article->getId()) );
 
         return $this->redirect($url);
     }

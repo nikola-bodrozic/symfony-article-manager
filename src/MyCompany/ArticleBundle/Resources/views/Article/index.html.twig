@@ -26,9 +26,9 @@
                 <td>{{ article.details }}</td>
                 <td>{{ article.owner.username }}</td>
                 <td>
-                    article has {{ article.writers|length }} writers.
+                    article has {{ article.writers|length }} writers.<br>
                     {% for w in article.writers %}
-                        <br><strong>{{ w }}</strong> has mail <strong>{{ w.email }}</strong>
+                        <br><strong>{{ w }}</strong> has mail <strong>{{ w.email | truncate(5)}}</strong><br>
                     {% endfor %}
                 </td>
                 <td>
@@ -37,9 +37,12 @@
                         <li>
                             <a href="{{ path('news_show', { 'id': article.id }) }}">show</a>
                         </li>
-                        {% if app.user == article.owner %}
                         <li>
                             <a href="{{ path('news_edit', { 'id': article.id }) }}">edit</a>
+                        </li>
+                        {% if app.user == article.owner %}
+                        <li>
+                            You are owner
                         </li>
                         {% endif %}
                     </ul>
