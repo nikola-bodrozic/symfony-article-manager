@@ -28,7 +28,7 @@
                 <td>
                     article has {{ article.writers|length }} writers.
                     {% for w in article.writers %}
-                        <br>{{ w.username }}
+                        <br><strong>{{ w }}</strong> has mail <strong>{{ w.email }}</strong>
                     {% endfor %}
                 </td>
                 <td>

@@ -303,5 +303,9 @@ class User implements AdvancedUserInterface, \Serializable
         $this->plainPassword = $plainPassword;
 
         return $this;
-    }    
+    }
+    public function __toString()
+    {
+        return (string) $this->getUsername();
+    }
 }
