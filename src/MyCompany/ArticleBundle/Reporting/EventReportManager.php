@@ -1,29 +1,28 @@
 <?php
 namespace MyCompany\ArticleBundle\Reporting;
 
-    class EventReportManager
+class EventReportManager
+{
+    
+    private $em;
+    public function __construct($em)
     {
-        /*
-        private $em;
-        public function __construct($em)
-        {
-            $this->em = $em;
-        }
-        */
-        public function getRecentlyUpdatedReport()
-        {
-            $em = $this->getDoctrine()->getManager();
-
-            $events = $em->getRepository('MyCompanyArticleBundle:Article')
-                ->getRecentlyUpdatedEvents();
-
-            $rows = array();
-            foreach ($events as $event) {
-                $data = array($event->getId(), $event->getName());
-
-                $rows[] = implode(',', $data);
-            }
-
-            return implode("\n", $rows);
-        }
+        $this->em = $em;
     }
+    
+    public function getRecentlyUpdatedReport()
+    {
+        $articles = $this->em->getRepository('MyCompanyArticleBundle:Article')
+                           ->getRecentlyUpdatedArticles()
+        ;
+
+        $rows = array();
+        foreach ($articles as $article) {
+            $data = array($article->getId(), $article->getName());
+
+            $rows[] = implode(',', $data);
+        }
+
+        return implode("\n", $rows);
+    }
+}

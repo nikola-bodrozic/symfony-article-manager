@@ -14,22 +14,13 @@ class ReportController extends Controller
      */
     public function updatedArticlesAction()
     {
+    	$em = $this->getDoctrine()->getManager();
     	$eventReportManager = new EventReportManager($em);
+
     	$content = $eventReportManager->getRecentlyUpdatedReport();
         $response = new Response($content);
         $response->headers->set('Content-Type', 'text/csv');
-        return $response;
-            	
-    	/*
-    	$em = $this->getDoctrine()->getManager();
-
-        $eventReportManager = new EventReportManager($em);
-        $content = $eventReportManager->getRecentlyUpdatedReport();
-
-        $response = new Response($content);
-        $response->headers->set('Content-Type', 'text/csv');
-        return $response;
-        */        
+        return $response;   
     }
 
 }
