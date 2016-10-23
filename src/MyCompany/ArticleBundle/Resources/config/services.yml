@@ -2,3 +2,7 @@ services:
 #    my_company_article.example:
 #        class: MyCompany\ArticleBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+services:
+    event_report_manager:
+        class: MyCompany\ArticleBundle\Reporting\EventReportManager
+        arguments: ["@doctrine.orm.entity_manager"]
