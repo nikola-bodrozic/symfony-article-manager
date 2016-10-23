@@ -3,7 +3,7 @@
 namespace MyCompany\ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use MyCompany\UserBundle\Entity\User;
 /**
  * Article
  *
@@ -48,6 +48,29 @@ class Article
      * @ORM\Column(name="details", type="text", nullable=true)
      */
     private $details;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MyCompany\UserBundle\Entity\User")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    protected $owner;
+
+//////////////////////////////////////////////
+    /**
+     * @return User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param User $owner
+     */
+    public function setOwner(User $owner)
+    {
+        $this->owner = $owner;
+    }
 
 
     /**
@@ -151,4 +174,6 @@ class Article
     {
         return $this->details;
     }
+
+
 }

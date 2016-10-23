@@ -4,10 +4,15 @@ namespace MyCompany\MyComanyArticleBundle\ArticleBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MyCompany\ArticleBundle\Entity\Article;
-class LoadEvents implements FixtureInterface
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+
+class LoadEvents implements FixtureInterface, OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        $admin = $manager->getRepository("UserBundle:User")
+                        ->findOneByUsernameOrEmail("admin");
+
         $article1 = new Article();
         $article1->setName('Darth\'s Birthday Party!');
         $article1->setLocation('Deathstar');
@@ -22,7 +27,14 @@ class LoadEvents implements FixtureInterface
         $article2->setDetails('Ewok pies! Support the rebellion!');
         $manager->persist($article2);
 
+        $article1->setOwner($admin);
+        $article2->setOwner($admin);
         // the queries aren't done until now
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 20;
     }
 }

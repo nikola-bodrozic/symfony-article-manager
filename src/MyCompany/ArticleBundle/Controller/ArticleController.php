@@ -53,6 +53,9 @@ class ArticleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $article->setOwner($user);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();

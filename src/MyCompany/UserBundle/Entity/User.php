@@ -60,6 +60,8 @@ class User implements AdvancedUserInterface, \Serializable
     */
     private $plainPassword;
 
+/////////////////////////////////////////////////////////////////////////
+
     /**
      * Get id
      *
