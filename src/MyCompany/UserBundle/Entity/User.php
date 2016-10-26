@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="sym_user")
  * @ORM\Entity(repositoryClass="MyCompany\UserBundle\Repository\UserRepository")
  * @UniqueEntity(fields="username", message="That username is taken!")
  * @UniqueEntity(fields="email", message="That email is taken!")

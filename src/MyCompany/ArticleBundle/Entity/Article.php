@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Article
  *
- * @ORM\Table(name="article")
+ * @ORM\Table(name="sym_article")
  * @ORM\Entity(repositoryClass="MyCompany\ArticleBundle\Repository\ArticleRepository")
  */
 class Article
