@@ -21,7 +21,7 @@
             <tr>
                 <td><a href="{{ path('news_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
                 <td>{{ article.name }}</td>
-                <td>{% if article.time %}{{ article.time|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if article.time %}{{ article.time|date('g:ia jS F Y') }}{% endif %}</td>
                 <td>{{ article.location }}</td>
                 <td>{{ article.details }}</td>
                 <td>{{ article.owner.username }}</td>
