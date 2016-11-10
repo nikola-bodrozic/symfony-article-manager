@@ -5,6 +5,7 @@ Symfony Article Manager
 After checkout run 
 * `composer install`
 * import logan.sql
+* rename file `app/config/parameters.yml.dist` to `app/config/parameters.yml` and add database credentials 
 
 ## Testing
 From project root run
